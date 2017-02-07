@@ -1,3 +1,25 @@
 <div class="container">
-  EXPRESS BOILERPLATE
+  <div class="emails-container">
+    {{#each helpers.emails}}
+    <span>{{this}}</span>
+    {{/each}}
+  </div>
+  <div class="domains-container">
+    {{#each helpers.domains}}
+    <span>{{this}}</span>
+    {{/each}}
+  </div>
+
+  <div class="verified-container">
+    {{#each helpers.verified}}
+    <span>{{this}}</span>
+    {{/each}}
+  </div>
+
+  <div class="unverified-container">
+    {{#each helpers.unverified}}
+    <span>{{this}}</span>
+    {{/each}}
+  </div>
+  
 </div>

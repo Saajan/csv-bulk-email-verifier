@@ -5,6 +5,9 @@ var exphbs = require('express-handlebars');
 var bodyParser = require("body-parser");
 var app = express();
 var config = require('./config/config.js');
+var verify = require('bulk-email-verifier');
+var csv = require('csv-parser')
+var $ = require("jquery");
 
 var path = require('path');
 
@@ -23,17 +26,17 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.set('host', config.host);
 
-require('./routes/routes.js')(express, app, fs);
+require('./routes/routes.js')(express, app, fs, verify, csv, $);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 var server = require('http').createServer(app);
 
-server.listen(process.env.PORT || 5000, function() {
-  if(process.env.PORT !== undefined){
+server.listen(process.env.PORT || 3000, function () {
+  if (process.env.PORT !== undefined) {
     console.log("Server is running at port " + process.env.PORT);
-  }else{
-    console.log("Server is running at port 5000");
+  } else {
+    console.log("Server is running at port");
   }
 
 });
