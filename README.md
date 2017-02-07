@@ -1,6 +1,3 @@
-# Express-Boilerplate
 
-This boilerplate contains setup from express web application.
+# csv-bulk-email-verifier
 
-
-It contains Sass , express-handlebars, Gulp , Browser-sync , Nodemon 
