@@ -8,6 +8,7 @@ var config = require('./config/config.js');
 var verify = require('bulk-email-verifier');
 var csv = require('csv-parser')
 var $ = require("jquery");
+var _ = require("underscore");
 
 var path = require('path');
 
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.set('host', config.host);
 
-require('./routes/routes.js')(express, app, fs, verify, csv, $);
+require('./routes/routes.js')(express, app, fs, verify, csv, $,_);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
