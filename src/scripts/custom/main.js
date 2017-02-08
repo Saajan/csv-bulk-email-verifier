@@ -2,12 +2,8 @@
 
   var socket = io.connect('http://localhost:3000');
   socket.on('success', function (data) {
-    //console.log(data);
     var fullData = data.data;
-    console.log(fullData);
-
     if (fullData.status != null || fullData.status != undefined) {
-
       var table = $('<table></table>').addClass('domain-table');
       var tbody = $('<tbody></tbody>');
       var tr = $('<tr></tr>');
@@ -23,7 +19,7 @@
       tr.append(td5);
       tbody.append(tr);
       table.append(tbody);
-      $('body').append(table);
+      $('.table-container').append(table);
     }
   });
 
