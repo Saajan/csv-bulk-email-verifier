@@ -1,5 +1,6 @@
-module.exports = function (express, app, fs, verify, csv, $, _) {
+module.exports = function (express, app, fs, verify, csv, $, _, io) {
   var router = express.Router();
+  require('events').EventEmitter.defaultMaxListeners = Infinity;
 
   router.get('/', function (req, res, next) {
     var domains = [];
@@ -27,19 +28,28 @@ module.exports = function (express, app, fs, verify, csv, $, _) {
               emailsArray.push(value1);
             }
           });
-          verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-            var finalObj = {
-              domain:value,
-              email:emailsArray,
-              status:data
-            };
-            completeArray.push(finalObj);
-            console.log(finalObj);
+          io.on('connection', function (socket) {
+            verify.verifyEmails(value, emailsArray, {}, function (err, data) {
+              var finalObj = {
+                domain: value,
+                email: emailsArray,
+                status: data,
+                error:err
+              };
+              //completeArray.push(finalObj);
+              console.log(finalObj);
+              socket.emit('success', {
+                data: finalObj
+              });
+            });
+
+
           });
-          
+
+
         });
 
-        console.log(completeArray);
+        //console.log(completeArray);
         //_.map(emails, function (value1) {
         //     verify.verifyEmails((data.Emails).split('@')[1], email, {}, function (err, data) {
         //       result.push(data);
@@ -47,13 +57,14 @@ module.exports = function (express, app, fs, verify, csv, $, _) {
       });
 
     res.render('index', {
-      helpers: {
-        result: completeArray,
-        domains: domains,
-        emails: emails
-      }
+      helpers: {}
     });
   });
+
+
+
+
+
 
   app.use('/', router);
 };

@@ -56,3 +56,13 @@ body {
   margin: 0px;
   padding: 3px;
 }
+
+.domain-table {
+  width: 100%;
+  background-color: #fff;
+  color: #000;
+  text-align: left;
+}
+.domain-table td {
+  width: 25%;
+}

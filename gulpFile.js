@@ -74,7 +74,8 @@ gulp.task('scripts-custom', function () {
 gulp.task('scripts-vendor', function () {
   return gulp.src([
       'src/scripts/vendor/jquery-3.0.0.js',
-      'src/scripts/vendor/mordernizr-3.0.1.js'
+      'src/scripts/vendor/mordernizr-3.0.1.js',
+      'node_modules/socket.io-client/dist/socket.io.js'
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('public/dist/scripts'))

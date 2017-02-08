@@ -10,6 +10,7 @@ var csv = require('csv-parser')
 var $ = require("jquery");
 var _ = require("underscore");
 
+
 var path = require('path');
 
 app.set("views", path.join(__dirname, "views"));
@@ -27,11 +28,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.set('host', config.host);
 
-require('./routes/routes.js')(express, app, fs, verify, csv, $,_);
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 var server = require('http').createServer(app);
+
+var io = require('socket.io').listen(server);
+
+require('./routes/routes.js')(express, app, fs, verify, csv, $,_,io);
 
 server.listen(process.env.PORT || 3000, function () {
   if (process.env.PORT !== undefined) {
