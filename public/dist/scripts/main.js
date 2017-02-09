@@ -1,6 +1,6 @@
 (function () {
 
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('https://digitvalue.herokuapp.com/');
   socket.on('success', function (data) {
     var fullData = data.data;
     if (fullData.status != null || fullData.status != undefined) {
