@@ -1,15 +1,15 @@
-module.exports = function(express, app, fs, verify, csv, $, _, io, writer) {
+module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
   var router = express.Router();
   require('events').EventEmitter.defaultMaxListeners = Infinity;
 
-  router.post('/upload', function(req, res, next) {
+  router.post('/upload', function (req, res, next) {
     var sampleFile;
     if (!req.files) {
       res.send('No files were uploaded.');
       return;
     }
     sampleFile = req.files.sampleFile;
-    sampleFile.mv('public/dist/static/email.csv', function(err) {
+    sampleFile.mv('public/dist/static/email.csv', function (err) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -17,28 +17,30 @@ module.exports = function(express, app, fs, verify, csv, $, _, io, writer) {
         var emails = [];
         fs.createReadStream('public/dist/static/email.csv')
           .pipe(csv())
-          .on('data', function(data) {
+          .on('data', function (data) {
             console.log(data);
             emails.push(data.Emails);
             domains.push((data.Emails).split('@')[1]);
-          }).on('end', function() {
+          }).on('end', function () {
             writer.pipe(fs.createWriteStream('public/dist/static/verified.csv'));
 
             var uniqueDomain = _.uniq(domains);
-            _.map(uniqueDomain, function(value) {
+            _.map(uniqueDomain, function (value) {
               var emailsArray = [];
-              _.map(emails, function(value1) {
+              _.map(emails, function (value1) {
                 if (value1.endsWith(value)) {
                   emailsArray.push(value1);
                 }
               });
-              io.on('connection', function(socket) {
-                verify.verifyEmails(value, emailsArray, {}, function(err, data) {
+              io.on('connection', function (socket) {
+                verify.verifyEmails(value, emailsArray, {}, function (err, data) {
                   if (data !== undefined || data.status.success !== false) {
-                    if (data.verified.length != 0) {
-                      writer.write({
-                        email: data.verified
-                      });
+                    if (data.verified !== undefined) {
+                      if (data.verified.length != 0) {
+                        writer.write({
+                          email: data.verified
+                        });
+                      }
                     }
                   }
                   var finalObj = {
@@ -62,7 +64,7 @@ module.exports = function(express, app, fs, verify, csv, $, _, io, writer) {
     });
   });
 
-  router.get('/', function(req, res, next) {
+  router.get('/', function (req, res, next) {
     res.render('index', {
       helpers: {}
     });
