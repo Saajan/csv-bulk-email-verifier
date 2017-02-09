@@ -34,8 +34,8 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
               });
               io.on('connection', function (socket) {
                 verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-                  console.log(data,err);
-                  if (data !== undefined) {
+                  console.log(data, err);
+                  if (data !== undefined || data !== null) {
                     if (data.status.success !== false) {
                       if (data.verified !== undefined) {
                         if (data.verified.length != 0) {
