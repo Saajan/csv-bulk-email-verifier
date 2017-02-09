@@ -18,7 +18,7 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
         fs.createReadStream('public/dist/static/email.csv')
           .pipe(csv())
           .on('data', function (data) {
-            console.log(data);
+            //console.log(data);
             emails.push(data.Emails);
             domains.push((data.Emails).split('@')[1]);
           }).on('end', function () {
@@ -34,6 +34,7 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
               });
               io.on('connection', function (socket) {
                 verify.verifyEmails(value, emailsArray, {}, function (err, data) {
+                  console.log(data,err);
                   if (data !== undefined) {
                     if (data.status.success !== false) {
                       if (data.verified !== undefined) {
