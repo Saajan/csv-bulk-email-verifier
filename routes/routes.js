@@ -34,12 +34,14 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
               });
               io.on('connection', function (socket) {
                 verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-                  if (data !== undefined || data.status.success !== false) {
-                    if (data.verified !== undefined) {
-                      if (data.verified.length != 0) {
-                        writer.write({
-                          email: data.verified
-                        });
+                  if (data !== undefined) {
+                    if (data.status.success !== false) {
+                      if (data.verified !== undefined) {
+                        if (data.verified.length != 0) {
+                          writer.write({
+                            email: data.verified
+                          });
+                        }
                       }
                     }
                   }
