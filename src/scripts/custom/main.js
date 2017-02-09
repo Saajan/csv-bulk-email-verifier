@@ -1,3 +1,4 @@
+var fs = require('fs');
 var csvWriter = require('csv-write-stream');
 var writer = csvWriter();
 
