@@ -34,7 +34,7 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
                 writer.pipe(fs.createWriteStream('public/dist/static/verified.csv'));
                 verify.verifyEmails(value, emailsArray, {}, function (err, data) {
                   if (data != undefined) {
-                    if (data.verfied.length != 0) {
+                    if (data.verified.length != 0) {
                       writer.write({
                         email: data.verified
                       });
@@ -54,7 +54,7 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
               });
             });
           });
-          
+
       }
     });
 
