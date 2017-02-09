@@ -33,9 +33,11 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
               io.on('connection', function (socket) {
                 writer.pipe(fs.createWriteStream('public/dist/static/verified.csv'));
                 verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-                  writer.write({
-                    email: data.verified
-                  });
+                  if (data.verfied.length != 0) {
+                    writer.write({
+                      email: data.verified
+                    });
+                  }
                   var finalObj = {
                     domain: value,
                     email: emailsArray,
