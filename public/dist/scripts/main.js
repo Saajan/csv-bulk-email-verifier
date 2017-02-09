@@ -50,7 +50,7 @@
     result += lineDelimiter;
 
     data.forEach(function (item) {
-      result += item[email];
+      result += item["email"];
       result += lineDelimiter;
     });
 
