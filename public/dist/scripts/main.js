@@ -126,7 +126,9 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/base64-js/lib/b64.js","/../../../node_modules/base64-js/lib")
-},{"FT5ORs":10,"buffer":3}],2:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],2:[function(require,module,exports){
+
+},{"FT5ORs":11,"buffer":4}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -321,7 +323,7 @@ function base64DetectIncompleteChar(buffer) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/browserify/node_modules/string_decoder/index.js","/../../../node_modules/browserify/node_modules/string_decoder")
-},{"FT5ORs":10,"buffer":3}],3:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
  * The buffer module from node.js, for the browser.
@@ -1434,7 +1436,7 @@ function assert (test, message) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/buffer/index.js","/../../../node_modules/buffer")
-},{"FT5ORs":10,"base64-js":1,"buffer":3,"ieee754":7}],4:[function(require,module,exports){
+},{"FT5ORs":11,"base64-js":1,"buffer":4,"ieee754":8}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var stream = require('stream')
 var util = require('util')
@@ -1537,7 +1539,7 @@ function esc(cell) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/csv-write-stream/index.js","/../../../node_modules/csv-write-stream")
-},{"FT5ORs":10,"buffer":3,"generate-object-property":6,"stream":12,"util":20}],5:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4,"generate-object-property":7,"stream":13,"util":21}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -1842,7 +1844,7 @@ function isUndefined(arg) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/events/events.js","/../../../node_modules/events")
-},{"FT5ORs":10,"buffer":3}],6:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var isProperty = require('is-property')
 
@@ -1858,7 +1860,7 @@ gen.property = function (prop) {
 module.exports = gen
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/generate-object-property/index.js","/../../../node_modules/generate-object-property")
-},{"FT5ORs":10,"buffer":3,"is-property":9}],7:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4,"is-property":10}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -1946,7 +1948,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/ieee754/index.js","/../../../node_modules/ieee754")
-},{"FT5ORs":10,"buffer":3}],8:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
@@ -1973,7 +1975,7 @@ if (typeof Object.create === 'function') {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/inherits/inherits_browser.js","/../../../node_modules/inherits")
-},{"FT5ORs":10,"buffer":3}],9:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict"
 function isProperty(str) {
@@ -1981,7 +1983,7 @@ function isProperty(str) {
 }
 module.exports = isProperty
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/is-property/is-property.js","/../../../node_modules/is-property")
-},{"FT5ORs":10,"buffer":3}],10:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // shim for using process in browser
 
@@ -2048,7 +2050,7 @@ process.chdir = function (dir) {
 };
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/process/browser.js","/../../../node_modules/process")
-},{"FT5ORs":10,"buffer":3}],11:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2124,7 +2126,7 @@ function onend() {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/duplex.js","/../../../node_modules/stream-browserify")
-},{"./readable.js":15,"./writable.js":17,"FT5ORs":10,"buffer":3,"inherits":8,"process/browser.js":13}],12:[function(require,module,exports){
+},{"./readable.js":16,"./writable.js":18,"FT5ORs":11,"buffer":4,"inherits":9,"process/browser.js":14}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2255,7 +2257,7 @@ Stream.prototype.pipe = function(dest, options) {
 };
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/index.js","/../../../node_modules/stream-browserify")
-},{"./duplex.js":11,"./passthrough.js":14,"./readable.js":15,"./transform.js":16,"./writable.js":17,"FT5ORs":10,"buffer":3,"events":5,"inherits":8}],13:[function(require,module,exports){
+},{"./duplex.js":12,"./passthrough.js":15,"./readable.js":16,"./transform.js":17,"./writable.js":18,"FT5ORs":11,"buffer":4,"events":6,"inherits":9}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // shim for using process in browser
 
@@ -2312,7 +2314,7 @@ process.chdir = function (dir) {
 };
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/node_modules/process/browser.js","/../../../node_modules/stream-browserify/node_modules/process")
-},{"FT5ORs":10,"buffer":3}],14:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2357,7 +2359,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
 };
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/passthrough.js","/../../../node_modules/stream-browserify")
-},{"./transform.js":16,"FT5ORs":10,"buffer":3,"inherits":8}],15:[function(require,module,exports){
+},{"./transform.js":17,"FT5ORs":11,"buffer":4,"inherits":9}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -3294,7 +3296,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/readable.js","/../../../node_modules/stream-browserify")
-},{"./index.js":12,"FT5ORs":10,"buffer":3,"events":5,"inherits":8,"process/browser.js":13,"string_decoder":2}],16:[function(require,module,exports){
+},{"./index.js":13,"FT5ORs":11,"buffer":4,"events":6,"inherits":9,"process/browser.js":14,"string_decoder":3}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -3502,7 +3504,7 @@ function done(stream, er) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/transform.js","/../../../node_modules/stream-browserify")
-},{"./duplex.js":11,"FT5ORs":10,"buffer":3,"inherits":8}],17:[function(require,module,exports){
+},{"./duplex.js":12,"FT5ORs":11,"buffer":4,"inherits":9}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -3892,7 +3894,7 @@ function endWritable(stream, state, cb) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/stream-browserify/writable.js","/../../../node_modules/stream-browserify")
-},{"./index.js":12,"FT5ORs":10,"buffer":3,"inherits":8,"process/browser.js":13}],18:[function(require,module,exports){
+},{"./index.js":13,"FT5ORs":11,"buffer":4,"inherits":9,"process/browser.js":14}],19:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
@@ -3919,7 +3921,7 @@ if (typeof Object.create === 'function') {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/util/node_modules/inherits/inherits_browser.js","/../../../node_modules/util/node_modules/inherits")
-},{"FT5ORs":10,"buffer":3}],19:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],20:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
@@ -3928,7 +3930,7 @@ module.exports = function isBuffer(arg) {
     && typeof arg.readUInt8 === 'function';
 }
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/util/support/isBufferBrowser.js","/../../../node_modules/util/support")
-},{"FT5ORs":10,"buffer":3}],20:[function(require,module,exports){
+},{"FT5ORs":11,"buffer":4}],21:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -4518,8 +4520,9 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/util/util.js","/../../../node_modules/util")
-},{"./support/isBuffer":19,"FT5ORs":10,"buffer":3,"inherits":18}],21:[function(require,module,exports){
+},{"./support/isBuffer":20,"FT5ORs":11,"buffer":4,"inherits":19}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var fs = require('fs');
 var csvWriter = require('csv-write-stream');
 var writer = csvWriter();
 
@@ -4538,5 +4541,5 @@ socket.on('success', function(data) {
   }
 });
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_98b6efe6.js","/")
-},{"FT5ORs":10,"buffer":3,"csv-write-stream":4}]},{},[21])
+}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ee918eb5.js","/")
+},{"FT5ORs":11,"buffer":4,"csv-write-stream":5,"fs":2}]},{},[22])
