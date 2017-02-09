@@ -62,7 +62,6 @@
 
   function downloadCSV(args) {
     var data, filename, link;
-
     var csv = convertArrayOfObjectsToCSV({
       data: jsonData
     });
