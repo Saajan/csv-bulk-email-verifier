@@ -40,7 +40,7 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
                       if (data.verified !== undefined) {
                         if (data.verified.length != 0) {
                           writer.write({
-                            email: data.verified
+                            email: data.verified.toString()
                           });
                         }
                       }
