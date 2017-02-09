@@ -34,7 +34,7 @@ module.exports = function(express, app, fs, verify, csv, $, _, io, writer) {
               });
               io.on('connection', function(socket) {
                 verify.verifyEmails(value, emailsArray, {}, function(err, data) {
-                  if (data != undefined) {
+                  if (data !== undefined || data.status.success !== false) {
                     if (data.verified.length != 0) {
                       writer.write({
                         email: data.verified
@@ -53,7 +53,6 @@ module.exports = function(express, app, fs, verify, csv, $, _, io, writer) {
                 });
               });
             });
-            writer.end();
           });
       }
     });
