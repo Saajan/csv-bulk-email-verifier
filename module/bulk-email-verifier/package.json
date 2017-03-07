@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "bulk-email-verifier",
+        "scope": null,
+        "escapedName": "bulk-email-verifier",
+        "name": "bulk-email-verifier",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/saajan/Documents/code/digit value/express-boilerplate"
+    ]
+  ],
+  "_from": "bulk-email-verifier@latest",
+  "_id": "bulk-email-verifier@1.0.4",
+  "_inCache": true,
+  "_location": "/bulk-email-verifier",
+  "_nodeVersion": "6.2.2",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/bulk-email-verifier-1.0.4.tgz_1472027335798_0.05783525784499943"
+  },
+  "_npmUser": {
+    "name": "kapilgp",
+    "email": "kapil.gp@gmail.com"
+  },
+  "_npmVersion": "3.9.5",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "bulk-email-verifier",
+    "scope": null,
+    "escapedName": "bulk-email-verifier",
+    "name": "bulk-email-verifier",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bulk-email-verifier/-/bulk-email-verifier-1.0.4.tgz",
+  "_shasum": "5393d3176d0d43670b8b85cee2be314810665e83",
+  "_shrinkwrap": null,
+  "_spec": "bulk-email-verifier",
+  "_where": "/Users/saajan/Documents/code/digit value/express-boilerplate",
+  "author": {
+    "name": "Kapil Gupta",
+    "email": "kapil.gp@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/kapilgp/bulk-email-verifier/issues"
+  },
+  "dependencies": {},
+  "description": "Bulk Email Verifier",
+  "devDependencies": {
+    "dns": "^0.2.2"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "5393d3176d0d43670b8b85cee2be314810665e83",
+    "tarball": "https://registry.npmjs.org/bulk-email-verifier/-/bulk-email-verifier-1.0.4.tgz"
+  },
+  "gitHead": "1321cb686810406d911eec8118fcba4b435af96b",
+  "homepage": "https://github.com/kapilgp/bulk-email-verifier#readme",
+  "keywords": [
+    "bulk",
+    "email",
+    "verifier",
+    "bulk domain verification",
+    "bulk email verification of single domain"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "kapilgp",
+      "email": "kapil.gp@gmail.com"
+    }
+  ],
+  "name": "bulk-email-verifier",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapilgp/bulk-email-verifier.git"
+  },
+  "scripts": {},
+  "version": "1.0.4"
+}

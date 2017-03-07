@@ -1,7 +1,6 @@
-module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
+module.exports = function (express, app, fs, verify, csv, $, _, io) {
   var router = express.Router();
   require('events').EventEmitter.defaultMaxListeners = Infinity;
-
   router.post('/upload', function (req, res, next) {
     var sampleFile;
     if (!req.files) {
@@ -18,12 +17,9 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
         fs.createReadStream('public/dist/static/email.csv')
           .pipe(csv())
           .on('data', function (data) {
-            //console.log(data);
             emails.push(data.Emails);
             domains.push((data.Emails).split('@')[1]);
           }).on('end', function () {
-            writer.pipe(fs.createWriteStream('public/dist/static/verified.csv'));
-
             var uniqueDomain = _.uniq(domains);
             _.map(uniqueDomain, function (value) {
               var emailsArray = [];
@@ -34,18 +30,6 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
               });
               io.on('connection', function (socket) {
                 verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-                  console.log(data, err);
-                  if (data !== null) {
-                    if (data !== undefined) {
-                      if (data.verified !== undefined) {
-                        if (data.verified.length != 0) {
-                          writer.write({
-                            email: data.verified.toString()
-                          });
-                        }
-                      }
-                    }
-                  }
                   var finalObj = {
                     domain: value,
                     email: emailsArray,
@@ -61,7 +45,6 @@ module.exports = function (express, app, fs, verify, csv, $, _, io, writer) {
           });
       }
     });
-
     res.render('upload', {
       helpers: {}
     });
