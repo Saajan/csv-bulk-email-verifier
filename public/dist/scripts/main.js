@@ -2,7 +2,6 @@
   var socket = io.connect('https://digitvalue.herokuapp.com/');
   // var socket = io.connect('http://localhost:3000');
   var jsonData = [];
-
   socket.on('success', function (data) {
     var fullData = data.data;
 
