@@ -24,7 +24,7 @@ const emailVerify = (domain, emails, options, callback) => {
   // Default Values
   if (options && !options.port) options.port = 25;
   if (options && !options.sender) options.sender = 'name@example.com';
-   if (options && !options.timeout) options.timeout = 5000;
+  /* if (options && !options.timeout) options.timeout = 0;*/
   if (options && !options.fqdn) options.fqdn = 'mail.example.com';
   if (options && (!options.ignore || typeof options.ignore !== 'number')) options.ignore = false;
 
