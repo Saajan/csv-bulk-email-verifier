@@ -29,7 +29,8 @@ module.exports = function (express, app, fs, verify, csv, $, _, io) {
                 }
               });
               io.on('connection', function (socket) {
-                for (var i = 0; i <= emailsArray.length; i++) {
+                var limit = emailsArray.length;
+                for (var i = 0; i <= limit; i++) {
                   (function (ind) {
                     setTimeout(function () {
                       console.log(ind);
