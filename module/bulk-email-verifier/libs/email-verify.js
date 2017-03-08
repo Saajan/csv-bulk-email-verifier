@@ -113,12 +113,12 @@ const emailVerify = (domain, emails, options, callback) => {
               if (response.indexOf('250') > -1 || (options.ignore && response.indexOf(options.ignore) > -1)) {
                 // Push into verified list
                 verified.push(email);
-                //console.log('verified', email);
+                console.log('verified', email);
                 // console.log(response + ' : ' +email);
               } else {
                 // Pushed into unverified list
                 unverified.push(email);
-                //console.log('un-verified', email);
+                console.log('un-verified', email);
               }
 
               // Check if still there are emails
