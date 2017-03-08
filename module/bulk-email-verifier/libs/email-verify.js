@@ -69,6 +69,8 @@ const emailVerify = (domain, emails, options, callback) => {
         response += data.toString();
         completed = response.slice(-1) === '\n';
 
+        console.log("data",response);
+
         if (completed) {
           switch (stage) {
             case 0:
