@@ -29,17 +29,27 @@ module.exports = function (express, app, fs, verify, csv, $, _, io) {
                 }
               });
               io.on('connection', function (socket) {
-                verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-                  var finalObj = {
-                    domain: value,
-                    email: emailsArray,
-                    status: data,
-                    error: err
-                  };
-                  socket.emit('success', {
-                    data: finalObj
-                  });
-                });
+                for (var i = 0; i <= emailsArray.length; i++) {
+                  (function (ind) {
+                    setTimeout(function () {
+                      console.log(ind);
+                      if (ind === limit) {
+                        console.log('It was the last one');
+                      }
+                      verify.verifyEmails(value, emailsArray, {}, function (err, data) {
+                        var finalObj = {
+                          domain: value,
+                          email: emailsArray,
+                          status: data,
+                          error: err
+                        };
+                        socket.emit('success', {
+                          data: finalObj
+                        });
+                      });
+                    }, 1000 + (3000 * ind));
+                  })(i);
+                }
               });
             });
           });
