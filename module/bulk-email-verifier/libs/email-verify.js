@@ -12,7 +12,7 @@ const dns = require('dns');
 const emailRcpt = (email, socket) => {
   setTimeout(function(email) {
     socket.write('RCPT TO:<' + email + '>\r\n', () => {
-       console.log("RCPT TO" + email);
+       //console.log("RCPT TO" + email);
     });
   }.bind(this, email), 100);
 };
@@ -30,10 +30,11 @@ const emailVerify = (domain, emails, options, callback) => {
 
   // Get the MX Records to find the SMTP server
   dns.resolveMx(domain, (err, addresses) => {
+      console.log(domain);
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
-      console.log("No MX Records")
+      //console.log("No MX Records")
       callback(null, {
         success: false,
         info: 'No MX Records'
@@ -42,7 +43,7 @@ const emailVerify = (domain, emails, options, callback) => {
       // Find the lowest priority mail server
       let priority = 10000;
       let index = 0;
-      console.log("address",addresses);
+      //console.log("address",addresses);
       for (let i = 0; i < addresses.length; i++) {
         if (addresses[i].priority < priority) {
           priority = addresses[i].priority;
@@ -69,7 +70,7 @@ const emailVerify = (domain, emails, options, callback) => {
         response += data.toString();
         completed = response.slice(-1) === '\n';
 
-        console.log("data",response);
+        //console.log("data",response);
 
         if (completed) {
           switch (stage) {
@@ -115,12 +116,12 @@ const emailVerify = (domain, emails, options, callback) => {
               if (response.indexOf('250') > -1 || (options.ignore && response.indexOf(options.ignore) > -1)) {
                 // Push into verified list
                 verified.push(email);
-                console.log('verified', email);
+                //console.log('verified', email);
                 // console.log(response + ' : ' +email);
               } else {
                 // Pushed into unverified list
                 unverified.push(email);
-                console.log('un-verified', email);
+                //console.log('un-verified', email);
               }
 
               // Check if still there are emails
