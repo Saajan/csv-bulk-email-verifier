@@ -30,7 +30,6 @@ const emailVerify = (domain, emails, options, callback) => {
 
   // Get the MX Records to find the SMTP server
   dns.resolveMx(domain, (err, addresses) => {
-      console.log(domain);
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
@@ -43,6 +42,7 @@ const emailVerify = (domain, emails, options, callback) => {
       // Find the lowest priority mail server
       let priority = 10000;
       let index = 0;
+      console.log("address",addresses);
       for (let i = 0; i < addresses.length; i++) {
         if (addresses[i].priority < priority) {
           priority = addresses[i].priority;
