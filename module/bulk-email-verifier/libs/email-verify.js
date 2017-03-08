@@ -12,7 +12,7 @@ const dns = require('dns');
 const emailRcpt = (email, socket) => {
   setTimeout(function(email) {
     socket.write('RCPT TO:<' + email + '>\r\n', () => {
-      // console.log("RCPT TO" + email);
+       console.log("RCPT TO" + email);
     });
   }.bind(this, email), 100);
 };
