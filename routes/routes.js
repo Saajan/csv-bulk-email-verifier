@@ -31,6 +31,8 @@ module.exports = function(express, app, fs, verify, csv, $, _, io) {
               io.on('connection', function(socket) {
                 var mainCount = 0;
 
+                debugger;
+
                 function recursiveLoop() {
                   var emailArrayToSend = [];
                   var domainToSend = [];
@@ -46,6 +48,8 @@ module.exports = function(express, app, fs, verify, csv, $, _, io) {
                     }
                   }
                 }
+
+                recursiveLoop();
 
                 res.render('upload', {
                   helpers: {}

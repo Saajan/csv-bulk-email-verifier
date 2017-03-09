@@ -34,13 +34,13 @@ const emailVerify = (domain, emails, options, callback) => {
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
-      console.log("No MX Records")
+      //console.log("No MX Records")
       callback(null, {
         success: false,
         info: 'No MX Records'
       });
     } else {
-        console.log("MX Records")
+        //console.log("MX Records")
       // Find the lowest priority mail server
       let priority = 10000;
       let index = 0;
