@@ -1,14 +1,14 @@
-module.exports = function (express, app, fs, verify, csv, $, _, io) {
+module.exports = function(express, app, fs, verify, csv, $, _, io) {
   var router = express.Router();
   require('events').EventEmitter.defaultMaxListeners = Infinity;
-  router.post('/upload', function (req, res, next) {
+  router.post('/upload', function(req, res, next) {
     var sampleFile;
     if (!req.files) {
       res.send('No files were uploaded.');
       return;
     }
     sampleFile = req.files.sampleFile;
-    sampleFile.mv('public/dist/static/email.csv', function (err) {
+    sampleFile.mv('public/dist/static/email.csv', function(err) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -16,52 +16,62 @@ module.exports = function (express, app, fs, verify, csv, $, _, io) {
         var emails = [];
         fs.createReadStream('public/dist/static/email.csv')
           .pipe(csv())
-          .on('data', function (data) {
+          .on('data', function(data) {
             emails.push(data.Emails);
             domains.push((data.Emails).split('@')[1]);
-          }).on('end', function () {
+          }).on('end', function() {
             var uniqueDomain = _.uniq(domains);
-            _.map(uniqueDomain, function (value) {
+            _.map(uniqueDomain, function(value) {
               var emailsArray = [];
-              _.map(emails, function (value1) {
+              _.map(emails, function(value1) {
                 if (value1.endsWith(value)) {
                   emailsArray.push(value1);
                 }
               });
-              io.on('connection', function (socket) {
-                var limit = emailsArray.length;
-                for (var i = 0; i <= limit; i++) {
-                  (function (ind) {
-                    setTimeout(function () {
-                      console.log(ind);
-                      if (ind === limit) {
-                        console.log('It was the last one');
-                      }
-                      verify.verifyEmails(value, emailsArray, {}, function (err, data) {
-                        var finalObj = {
-                          domain: value,
-                          email: emailsArray,
-                          status: data,
-                          error: err
-                        };
-                        socket.emit('success', {
-                          data: finalObj
-                        });
-                      });
-                    }, 1000 + (3000 * ind));
-                  })(i);
+              io.on('connection', function(socket) {
+                var mainCount = 0;
+
+                function recursiveLoop() {
+                  var emailArrayToSend = [];
+                  var domainToSend = [];
+                  for (mainCount = mainCount; mainCount < value.length; mainCount++) {
+                    console.log(mainCount, emailsArray[mainCount], value[maincount]);
+                    emailArrayToSend.push(emailsArray[mainCount]);
+                    domainToSend.push(value[maincount]);
+                    if (mainCount % 50) {
+                      connectionLoop(domainToSend, emailArrayToSend);
+                      setTimeout(function() {
+                        recursiveLoop();
+                      }, 5000);
+                    }
+                  }
                 }
+
+                res.render('upload', {
+                  helpers: {}
+                });
               });
             });
           });
       }
     });
-    res.render('upload', {
-      helpers: {}
-    });
   });
 
-  router.get('/', function (req, res, next) {
+  function connectionLoop(domain, emails) {
+    verify.verifyEmails(domain, emails, {}, function(err, data) {
+      var finalObj = {
+        domain: domain,
+        email: emails,
+        status: data,
+        error: err
+      };
+      socket.emit('success', {
+        data: finalObj
+      });
+    });
+  }
+
+  router.get('/', function(req, res, next) {
     res.render('index', {
       helpers: {}
     });
