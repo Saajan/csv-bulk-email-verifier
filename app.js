@@ -5,9 +5,6 @@ var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var app = express();
 var config = require('./config/config.js');
-var verify = require('./module/bulk-email-verifier');
-var csv = require('csv-parser');
-var $ = require('jquery');
 var _ = require('underscore');
 var fileUpload = require('express-fileupload');
 var path = require('path');
@@ -37,7 +34,7 @@ var server = require('http').createServer(app);
 
 var io = require('socket.io').listen(server);
 
-require('./routes/routes.js')(express, app, fs, verify, csv, $, _, io, writer);
+require('./routes/routes.js')(express, app, fs, _, io, writer);
 
 server.listen(process.env.PORT || 3000, function () {
   if (process.env.PORT !== undefined) {
