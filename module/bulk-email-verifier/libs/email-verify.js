@@ -18,6 +18,8 @@ const emailRcpt = (email, socket) => {
 };
 
 const emailVerify = (domain, emails, options, callback) => {
+
+  //console.log(domain,emails);
   let verified = [];
   let unverified = [];
 
@@ -30,7 +32,7 @@ const emailVerify = (domain, emails, options, callback) => {
 
   // Get the MX Records to find the SMTP server
   dns.resolveMx(domain, (err, addresses) => {
-      //console.log(domain,addresses);
+      console.log(domain,addresses);
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
@@ -74,6 +76,7 @@ const emailVerify = (domain, emails, options, callback) => {
         //console.log("data",response);
 
         if (completed) {
+          console.log("response",response);
           switch (stage) {
             case 0:
               if (response.indexOf('220') > -1 && !ended) {
