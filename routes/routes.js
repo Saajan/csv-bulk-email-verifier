@@ -71,7 +71,7 @@ const _isValidDomainMX = (domains, emails) => {
   //   }
   //  });
   // });
-  dns.resolveMX('saajan.sn@gmail.com', (error, addresses) => { console.error(error); console.log(addresses); });
+  dns.resolveMx('saajan.sn@gmail.com', (error, addresses) => { console.error(error); console.log(addresses); });
   domains.forEach(function (domain,index) {
     //verify.verifyEmails(domain, emails[index], {}, function (err, data) {
       //console.log(data);
