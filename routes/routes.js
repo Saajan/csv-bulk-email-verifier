@@ -2,6 +2,7 @@
 
 const dns = require('dns');
 var csv = require('csv-parser');
+var emailExistence = require('email-existence');
 var verify = require('../module/bulk-email-verifier');
 var SERVERS = ['8.8.8.8', '81.218.119.11', '195.46.39.39', '96.90.175.167', '208.76.50.50', '216.146.35.35', '37.235.1.174', '198.101.242.72', '77.88.8.8', '91.239.100.100', '74.82.42.42', '109.69.8.51', '	209.244.0.3', '64.6.64.6'];
 var SERVERS_LENGTH = SERVERS.length;
@@ -71,8 +72,12 @@ const _isValidDomainMX = (domains, emails) => {
   //  });
   // });
   domains.forEach(function (domain,index) {
-    verify.verifyEmails(domain, emails[index], {}, function (err, data) {
-      console.log(data);
+    //verify.verifyEmails(domain, emails[index], {}, function (err, data) {
+      //console.log(data);
+    //});
+
+    emailExistence.check(emails[index], function(error, response){
+        console.log('res: '+response);
     });
   });
 };

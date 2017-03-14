@@ -16,6 +16,7 @@
     "cheerio": "^0.22.0",
     "csv-parser": "^1.11.0",
     "csv-write-stream": "^2.0.0",
+    "email-existence": "^0.1.5",
     "express": "^4.13.4",
     "express-fileupload": "0.0.6",
     "express-handlebars": "^3.0.0",

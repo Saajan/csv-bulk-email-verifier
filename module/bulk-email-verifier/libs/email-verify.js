@@ -17,11 +17,12 @@ const emailRcpt = (email, socket) => {
   }.bind(this, email), 100);
 };
 
-const emailVerify = (domain, emails, options, callback) => {
+const emailVerify = (domain, addresses, options, callback) => {
 
-  //console.log(domain,emails);
+  console.log(domain,addresses);
   let verified = [];
   let unverified = [];
+
 
   // Default Values
   if (options && !options.port) options.port = 25;
@@ -32,7 +33,7 @@ const emailVerify = (domain, emails, options, callback) => {
 
   // Get the MX Records to find the SMTP server
   dns.resolveMx(domain, (err, addresses) => {
-      console.log(domain,addresses);
+      console.log(domain,err,addresses);
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
