@@ -71,13 +71,16 @@ const _isValidDomainMX = (domains, emails) => {
   //   }
   //  });
   // });
+  dns.resolve(emails[0], (error, addresses) => { console.error(error); console.log(addresses); });
   domains.forEach(function (domain,index) {
     //verify.verifyEmails(domain, emails[index], {}, function (err, data) {
       //console.log(data);
     //});
 
-    emailExistence.check(emails[index], function(error, response){
-        console.log('res: '+response);
-    });
+    //emailExistence.check(emails[index], function(error, response){
+        //console.log('res: '+response);
+    //});
+
+    
   });
 };
