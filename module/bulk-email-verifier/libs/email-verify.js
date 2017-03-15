@@ -111,6 +111,8 @@ const emailVerify = (domain, emails, options, callback) => {
             case 2:
               if (response.indexOf('250') > -1 && !ended) {
                 // Popout one email and sent to socket RCPT command
+
+                console.log("emails length",emails.length,emails);
                 if (emails.length > 0) {
                   email = emails.pop();
                   emailRcpt(email, socket);
