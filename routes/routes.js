@@ -8,17 +8,17 @@ var SERVERS = ['8.8.8.8', '81.218.119.11', '195.46.39.39', '96.90.175.167', '208
 var SERVERS_LENGTH = SERVERS.length;
 var SERVER_COUNT = 0;
 
-module.exports = function (express, app, fs, _, io) {
+module.exports = function(express, app, fs, _, io) {
   var router = express.Router();
   require('events').EventEmitter.defaultMaxListeners = Infinity;
-  router.post('/upload', function (req, res, next) {
+  router.post('/upload', function(req, res, next) {
     var sampleFile;
     if (!req.files) {
       res.send('No files were uploaded.');
       return;
     }
     sampleFile = req.files.sampleFile;
-    sampleFile.mv('public/dist/static/email.csv', function (err) {
+    sampleFile.mv('public/dist/static/email.csv', function(err) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -26,11 +26,11 @@ module.exports = function (express, app, fs, _, io) {
         var emails = [];
         fs.createReadStream('public/dist/static/email.csv')
           .pipe(csv())
-          .on('data', function (data) {
+          .on('data', function(data) {
             emails.push(data.Emails);
             // console.log(data);
             domains.push((data.Emails).split('@')[1]);
-          }).on('end', function () {
+          }).on('end', function() {
             _isValidDomainMX(emails, domains);
           });
       }
@@ -40,7 +40,7 @@ module.exports = function (express, app, fs, _, io) {
     });
   });
 
-  router.get('/', function (req, res, next) {
+  router.get('/', function(req, res, next) {
     res.render('index', {
       helpers: {}
     });
@@ -49,7 +49,8 @@ module.exports = function (express, app, fs, _, io) {
   app.use('/', router);
 };
 
-const _isValidDomainMX = (domains, emails) => {
+const _isValidDomainMX = (emails, domains) => {
+  console.log("starting",domains.length);
   // Get the MX Records to find the SMTP server
   // function to resolve mx records
   // loops through emails and launches parallel requests - rate limit as required
@@ -71,16 +72,39 @@ const _isValidDomainMX = (domains, emails) => {
   //   }
   //  });
   // });
-  dns.lookup('saajan.sn@gmail.com', (error, addresses) => { console.error(error); console.log(addresses); });
-  domains.forEach(function (domain,index) {
-    //verify.verifyEmails(domain, emails[index], {}, function (err, data) {
-      //console.log(data);
-    //});
 
-    //emailExistence.check(emails[index], function(error, response){
-        //console.log('res: '+response);
-    //});
+  // console.log(domains, emails);
 
-    
-  });
+  // var servers = dns.getServers();
+  // dns.setServers(['81.218.119.11', '195.46.39.39', '96.90.175.167', '208.76.50.50', '216.146.35.35', '37.235.1.174', '198.101.242.72', '77.88.8.8', '91.239.100.100']);
+
+  // dns.resolveMx('saajan.sn@gmail.com', (error, addresses) => { console.error(error); console.log(addresses); });
+  var time = 10000;
+  setTimeout(function() {
+    while (domains.length) {
+      // console.log(a.splice(0, 10));
+      callForCheckup(domains.splice(0, 10), emails.splice(0, 10));
+    }
+  }, time);
+  time += 10000;
+
+  // dns.resolveMx(domain, (error, addresses) => {
+  //  setTimeout(function () {
+  //    dns.setServers(servers);
+  // }, 0);
+  //  console.error(error);
+  //  console.log('addresses:', addresses);
+  // });
+
+  // emailExistence.check(emails[index], function(error, response){
+  // console.log('res: '+response);
+  // });
 };
+
+function callForCheckup(newDomains, newEmails) {
+  newDomains.forEach(function(domain, index) {
+    verify.verifyEmails(domain, newEmails[index], {}, function(err, data) {
+      console.log('outside_' + index, domain, newEmails[index], err, data);
+    });
+  });
+}

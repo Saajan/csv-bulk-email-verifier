@@ -10,16 +10,16 @@
 const dns = require('dns');
 
 const emailRcpt = (email, socket) => {
-  setTimeout(function(email) {
+  setTimeout(function (email) {
     socket.write('RCPT TO:<' + email + '>\r\n', () => {
-       //console.log("RCPT TO" + email);
+      //console.log("RCPT TO" + email);
     });
   }.bind(this, email), 100);
 };
 
-const emailVerify = (domain, addresses, options, callback) => {
+const emailVerify = (domain, emails, options, callback) => {
 
-  console.log(domain,addresses);
+  //console.log(domain, emails);
   let verified = [];
   let unverified = [];
 
@@ -32,8 +32,12 @@ const emailVerify = (domain, addresses, options, callback) => {
   if (options && (!options.ignore || typeof options.ignore !== 'number')) options.ignore = false;
 
   // Get the MX Records to find the SMTP server
+  //dns.setServers(['81.218.119.11', '195.46.39.39', '96.90.175.167', '208.76.50.50', '216.146.35.35', '37.235.1.174', '198.101.242.72', '77.88.8.8', '91.239.100.100']);
   dns.resolveMx(domain, (err, addresses) => {
-      console.log(domain,err,addresses);
+    //setTimeout(function () {
+    //  dns.setServers(servers);
+    //}, 1000);
+    //console.log("each domain", domain, err, addresses);
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
@@ -43,7 +47,7 @@ const emailVerify = (domain, addresses, options, callback) => {
         info: 'No MX Records'
       });
     } else {
-        //console.log("MX Records")
+      //console.log("MX Records")
       // Find the lowest priority mail server
       let priority = 10000;
       let index = 0;
@@ -68,7 +72,8 @@ const emailVerify = (domain, addresses, options, callback) => {
       let email = '';
 
       // Reverse Emails for popout, so sequence of email will be maintain
-      emails.reverse();
+//console.log(emails);
+      //emails.reverse();
 
       socket.on('data', data => {
         response += data.toString();
@@ -77,7 +82,7 @@ const emailVerify = (domain, addresses, options, callback) => {
         //console.log("data",response);
 
         if (completed) {
-          console.log("response",response);
+          console.log("response", response);
           switch (stage) {
             case 0:
               if (response.indexOf('220') > -1 && !ended) {
