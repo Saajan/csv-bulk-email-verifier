@@ -141,7 +141,7 @@ const emailVerify = (domain, emails, options, callback) => {
               }
 
               // Check if still there are emails
-              if (emails.length > 0) {
+              if (Array.isArray(emails)) {
                 // Again popout next email and send to RCPT Command
                 email = emails.pop();
                 emailRcpt(email, socket);
