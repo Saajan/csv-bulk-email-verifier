@@ -72,7 +72,7 @@ const emailVerify = (domain, emails, options, callback) => {
       let email = '';
 
       // Reverse Emails for popout, so sequence of email will be maintain
-console.log(emails);
+      console.log(emails);
       //emails.reverse();
 
       socket.on('data', data => {
@@ -137,7 +137,11 @@ console.log(emails);
               // Check if still there are emails
               if (emails.length > 0) {
                 // Again popout next email and send to RCPT Command
-                email = emails.pop();
+                if (emails.length > 0) {
+                  email = emails.pop();
+                } else {
+                  email = emails;
+                }
                 emailRcpt(email, socket);
 
                 response = '';
