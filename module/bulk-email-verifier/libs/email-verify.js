@@ -72,7 +72,7 @@ const emailVerify = (domain, emails, options, callback) => {
       let email = '';
 
       // Reverse Emails for popout, so sequence of email will be maintain
-      console.log(emails);
+      //console.log(emails);
       //emails.reverse();
 
       socket.on('data', data => {
@@ -82,7 +82,7 @@ const emailVerify = (domain, emails, options, callback) => {
         //console.log("data",response);
 
         if (completed) {
-          console.log("response", response);
+          //console.log("response", response);
           switch (stage) {
             case 0:
               if (response.indexOf('220') > -1 && !ended) {
@@ -112,7 +112,7 @@ const emailVerify = (domain, emails, options, callback) => {
               if (response.indexOf('250') > -1 && !ended) {
                 // Popout one email and sent to socket RCPT command
 
-                console.log("emails length", emails.length, emails);
+                //console.log("emails length", emails.length, emails);
                 if (Array.isArray(emails)) {
                   email = emails.pop();
                   emailRcpt(email, socket);
