@@ -112,10 +112,12 @@ const emailVerify = (domain, emails, options, callback) => {
               if (response.indexOf('250') > -1 && !ended) {
                 // Popout one email and sent to socket RCPT command
 
-                console.log("emails length",emails.length,emails);
-                if (emails.length > 1) {
+                console.log("emails length", emails.length, emails);
+                if (Array.isArray(emails)) {
                   email = emails.pop();
                   emailRcpt(email, socket);
+                } else {
+                  emailRcpt(emails, socket);
                 }
 
                 // Increment stage
