@@ -113,7 +113,7 @@ const emailVerify = (domain, emails, options, callback) => {
                 // Popout one email and sent to socket RCPT command
 
                 console.log("emails length",emails.length,emails);
-                if (emails.length > 0) {
+                if (emails.length > 1) {
                   email = emails.pop();
                   emailRcpt(email, socket);
                 }
