@@ -72,7 +72,7 @@ const emailVerify = (domain, emails, options, callback) => {
       let email = '';
 
       // Reverse Emails for popout, so sequence of email will be maintain
-//console.log(emails);
+console.log(emails);
       //emails.reverse();
 
       socket.on('data', data => {
