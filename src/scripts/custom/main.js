@@ -1,20 +1,20 @@
-(function() {
+(function () {
   var socket = io.connect('https://digitvalue2.herokuapp.com/');
-   //var socket = io.connect('http://localhost:3000');
+  //var socket = io.connect('http://localhost:3000');
   var jsonData = [];
-  socket.on('success', function(data) {
+  socket.on('success', function (data) {
     var fullData = data.data;
 
     if (fullData.status != null || fullData.status != undefined) {
       if (fullData.status.verified !== undefined) {
         //if (fullData.status.verified == '') {
-          console.log(fullData);
-          // $.each(fullData.status.verified, function (key, value) {
-          var json = {
-            email: fullData.email
-          };
-          jsonData.push(json);
-          // });
+        console.log(fullData);
+        // $.each(fullData.status.verified, function (key, value) {
+        var json = {
+          email: fullData.email
+        };
+        jsonData.push(json);
+        // });
         //}
       }
       var tbody = $('.domain-table tbody');
@@ -49,15 +49,17 @@
     result += keys;
     result += lineDelimiter;
 
-    data.forEach(function(item) {
-      result += item.email;
-      result += lineDelimiter;
+    data.forEach(function (item) {
+      if (item.status.verified !== undefined || item.status.verified.length !== 0) {
+        result += item.email;
+        result += lineDelimiter;
+      }
     });
 
     return result;
   }
 
-  $('#csvid').on('click', function() {
+  $('#csvid').on('click', function () {
     var data, filename, link;
     var csv = convertArrayOfObjectsToCSV({
       data: jsonData
