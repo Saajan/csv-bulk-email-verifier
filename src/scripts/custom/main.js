@@ -1,24 +1,27 @@
-(function () {
+(function() {
   var socket = io.connect('https://digitvalue2.herokuapp.com/');
-  //var socket = io.connect('http://localhost:3000');
+  // var socket = io.connect('http://localhost:3000');
   var jsonData = [];
-  socket.on('success', function (data) {
+  var index = 0;
+  socket.on('success', function(data) {
     var fullData = data.data;
-
     if (fullData.status != null || fullData.status != undefined) {
       if (fullData.status.verified !== undefined) {
-        //if (fullData.status.verified == '') {
+        // if (fullData.status.verified == '') {
         console.log(fullData);
         // $.each(fullData.status.verified, function (key, value) {
         var json = {
           email: fullData.email
         };
+        index++;
         jsonData.push(json);
         // });
-        //}
+        // }
       }
       var tbody = $('.domain-table tbody');
       var tr = $('<tr></tr>');
+      var td11 = $('<td></td>').text(index);
+      tr.append(td11);
       var td1 = $('<td></td>').text(fullData.domain);
       tr.append(td1);
       var td2 = $('<td></td>').text(fullData.email);
@@ -35,42 +38,33 @@
 
   function convertArrayOfObjectsToCSV(args) {
     var result, keys, lineDelimiter, data;
-
     data = args.data || null;
     if (data == null || !data.length) {
       return null;
     }
-
     lineDelimiter = args.lineDelimiter || '\n';
-
     keys = Object.keys(data[0]);
-
     result = '';
     result += keys;
     result += lineDelimiter;
-
-    data.forEach(function (item) {
-        result += item.email;
-        result += lineDelimiter;
+    data.forEach(function(item) {
+      result += item.email;
+      result += lineDelimiter;
     });
-
     return result;
   }
 
-  $('#csvid').on('click', function () {
+  $('#csvid').on('click', function() {
     var data, filename, link;
     var csv = convertArrayOfObjectsToCSV({
       data: jsonData
     });
     if (csv == null) return;
-
     filename = 'export.csv';
-
     if (!csv.match(/^data:text\/csv/i)) {
       csv = 'data:text/csv;charset=utf-8,' + csv;
     }
     data = encodeURI(csv);
-
     link = document.createElement('a');
     link.setAttribute('href', data);
     link.setAttribute('download', filename);
