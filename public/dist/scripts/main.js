@@ -50,10 +50,8 @@
     result += lineDelimiter;
 
     data.forEach(function (item) {
-      if (item.status.verified !== undefined || item.status.verified.length !== 0) {
         result += item.email;
         result += lineDelimiter;
-      }
     });
 
     return result;
