@@ -1,19 +1,19 @@
 (function () {
-  //var socket = io.connect('https://digitvalue.herokuapp.com/');
-   var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('https://digitvalue2.herokuapp.com/');
+   //var socket = io.connect('http://localhost:3000');
   var jsonData = [];
   socket.on('success', function (data) {
     var fullData = data.data;
 
     if (fullData.status != null || fullData.status != undefined) {
       if (fullData.status.verified !== undefined) {
-        if (fullData.status.verified.length > 0) {
-          $.each(fullData.status.verified, function (key, value) {
+        if (fullData.status.verified = '') {
+          //$.each(fullData.status.verified, function (key, value) {
             var json = {
-              email: value
+              email: fullData.email
             };
             jsonData.push(json);
-          });
+          //});
         }
       }
       var tbody = $('.domain-table tbody');
