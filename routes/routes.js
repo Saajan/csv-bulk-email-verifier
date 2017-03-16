@@ -28,7 +28,7 @@ module.exports = function (express, app, fs, _,io) {
             // console.log(data);
             domains.push((data.Emails).split('@')[1]);
           }).on('end', function () {
-            _isValidDomainMX(emails, domains);
+            _isValidDomainMX(emails, domains,io);
           });
       }
       res.render('upload', {
@@ -46,14 +46,14 @@ module.exports = function (express, app, fs, _,io) {
   app.use('/', router);
 };
 
-const _isValidDomainMX = (emails, domains) => {
+const _isValidDomainMX = (emails, domains,io) => {
   console.log("starting", domains.length);
   var time = 10000;
   io.on('connection', function (socket) {
     setTimeout(function () {
       while (domains.length) {
         // console.log(a.splice(0, 10));
-        callForCheckup(domains.splice(0, 10), emails.splice(0, 10));
+        callForCheckup(domains.splice(0, 10), emails.splice(0, 10),socket);
       }
     }, time);
     time += 10000;
@@ -63,7 +63,7 @@ const _isValidDomainMX = (emails, domains) => {
 function callForCheckup(newDomains, newEmails) {
 
 
-  newDomains.forEach(function (domain, index) {
+  newDomains.forEach(function (domain, index,socket) {
     verify.verifyEmails(domain, newEmails[index], {}, function (err, data) {
       console.log('outside_' + index, domain, newEmails[index], err, data);
       var finalObj = {
