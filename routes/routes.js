@@ -4,9 +4,8 @@ const dns = require('dns');
 var csv = require('csv-parser');
 var emailExistence = require('email-existence');
 var verify = require('../module/bulk-email-verifier');
-var io = require('socket.io').listen(server);
 
-module.exports = function (express, app, fs, _) {
+module.exports = function (express, app, fs, _,io) {
   var router = express.Router();
   require('events').EventEmitter.defaultMaxListeners = Infinity;
   router.post('/upload', function (req, res, next) {
