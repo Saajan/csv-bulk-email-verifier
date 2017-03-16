@@ -32,9 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var server = require('http').createServer(app);
 
-var io = require('socket.io').listen(server);
 
-require('./routes/routes.js')(express, app, fs, _, io, writer);
+
+require('./routes/routes.js')(express, app, fs, _);
 
 server.listen(process.env.PORT || 3000, function () {
   if (process.env.PORT !== undefined) {
