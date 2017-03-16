@@ -21,13 +21,13 @@
       var tr = $('<tr></tr>');
       var td1 = $('<td></td>').text(fullData.domain);
       tr.append(td1);
-      var td2 = $('<td></td>').text(fullData.email.toString());
+      var td2 = $('<td></td>').text(fullData.email);
       tr.append(td2);
       var td3 = $('<td></td>').text(fullData.status.success);
       tr.append(td3);
-      var td4 = $('<td></td>').text(fullData.status.verified.toString());
+      var td4 = $('<td></td>').text(fullData.status.verified);
       tr.append(td4);
-      var td5 = $('<td></td>').text(fullData.status.unverified.toString());
+      var td5 = $('<td></td>').text(fullData.status.unverified);
       tr.append(td5);
       $(tbody).append(tr);
     }
