@@ -13,6 +13,7 @@
         var json = {
           email: fullData.email
         };
+        
         index++;
         jsonData.push(json);
         // });
