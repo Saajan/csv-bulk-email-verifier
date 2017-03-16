@@ -117,6 +117,7 @@ const emailVerify = (domain, emails, options, callback) => {
                   email = emails.pop();
                   emailRcpt(email, socket);
                 } else {
+                  email = emails;
                   emailRcpt(emails, socket);
                 }
 
