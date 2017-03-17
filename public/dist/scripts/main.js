@@ -5,7 +5,7 @@
   var jsonData =[];
   socket.on('ping', function (data) {
     console.log(data);
-  };
+  });
   socket.on('success', function (data) {
     var fullDatum = data.data;
     console.log(fullDatum);
