@@ -5,6 +5,7 @@
   var index = 0;
   socket.on('success', function (data) {
     var fullData = data.data;
+    index++;
     if (fullData.status != null || fullData.status != undefined) {
       if ((fullData.status.verified).length > 0) {
         // if (fullData.status.verified == '') {
@@ -13,8 +14,6 @@
         var json = {
           email: fullData.email
         };
-
-        index++;
         jsonData.push(json);
         // });
         // }
@@ -37,7 +36,7 @@
     } else if (fullData.error != null) {
       var tbody = $('.domain-table tbody');
       var tr = $('<tr></tr>');
-      var td11 = $('<td></td>').text("-");
+      var td11 = $('<td></td>').text(index);
       tr.append(td11);
       var td1 = $('<td></td>').text(fullData.domain);
       tr.append(td1);
