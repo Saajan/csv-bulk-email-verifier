@@ -5,11 +5,12 @@
   var index = 0;
   socket.on('success', function (data) {
     var fullData = data.data;
+    console.log(fullData);
     index++;
     if (fullData.status != null || fullData.status != undefined) {
       if ((fullData.status.verified).length > 0) {
         // if (fullData.status.verified == '') {
-        console.log(fullData);
+        //console.log(fullData);
         // $.each(fullData.status.verified, function (key, value) {
         var json = {
           email: fullData.email
