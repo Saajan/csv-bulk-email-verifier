@@ -10,7 +10,7 @@
  * https://jquery.org/license
  *
  * Date: 2016-06-09T18:02Z
- */
+ */ 
 ( function( global, factory ) {
 
 	"use strict";

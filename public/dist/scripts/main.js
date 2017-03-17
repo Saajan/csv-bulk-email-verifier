@@ -8,7 +8,7 @@
   });
   socket.on('success', function (data) {
     var fullDatum = data.data;
-    console.log(fullDatum);
+    console.log(fullDatum); 
     fullDatum.forEach(function (fullData, index) {
       if (fullData.status != null || fullData.status != undefined) {
         if ((fullData.status.verified).length > 0) {
