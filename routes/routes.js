@@ -31,6 +31,8 @@ module.exports = function (express, app, fs, _, server) {
             domains.push((data.Emails).split('@')[1]);
           }).on('end', function () {
             console.log("end");
+            console.log('starting', domains.length);
+            startingDomainLength = domains.length;
             io.on('connection', function (socket) {
               // _isValidDomainMX(emails, domains);
               _isValidDomainMX(emails, domains, socket);
@@ -52,9 +54,7 @@ module.exports = function (express, app, fs, _, server) {
   app.use('/', router);
 };
 
-const _isValidDomainMX = (emails, domains, socket) => {
-  console.log('starting', domains.length);
-  startingDomainLength = domains.length;
+const _isValidDomainMX = (emailset, domainset, socket) => {
   var time = 10000;
   var finalObj = [];
   setTimeout(function () {
@@ -62,10 +62,10 @@ const _isValidDomainMX = (emails, domains, socket) => {
       data: startingDomainLength
     });
     var mainCount = 0;
-    while (domains.length) {
+    while (domainset.length) {
       // console.log(a.splice(0, 10));
-      var newDomains = domains.splice(0, 10);
-      var newEmails = emails.splice(0, 10);
+      var newDomains = domainset.splice(0, 10);
+      var newEmails = emailset.splice(0, 10);
       newDomains.forEach(function (domaino, index) {
         var emailo = newEmails[index];
         verify.verifyEmails(domaino, emailo, {}, function (err, data) {
