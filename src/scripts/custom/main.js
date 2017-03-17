@@ -2,6 +2,7 @@
   var socket = io.connect('https://digitvalue.herokuapp.com/');
   // var socket = io.connect('http://localhost:3000');
   var fullDatum = [];
+  var jsonData =[];
   socket.on('success', function (data) {
     var fullDatum = data.data;
     console.log(fullDatum);
