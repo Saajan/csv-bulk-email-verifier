@@ -58,11 +58,11 @@ const _isValidDomainMX = (emailset, domainset, socket) => {
   var time = 10000;
   var finalObj = [];
   setTimeout(function () {
-    socket.emit('ping', {
-      data: startingDomainLength
-    });
     var mainCount = 0;
     while (domainset.length) {
+      socket.emit('ping', {
+        data: domainset.length
+      });
       // console.log(a.splice(0, 10));
       var newDomains = domainset.splice(0, 10);
       var newEmails = emailset.splice(0, 10);
