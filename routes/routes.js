@@ -5,7 +5,7 @@ var csv = require('csv-parser');
 var emailExistence = require('email-existence');
 var verify = require('../module/bulk-email-verifier');
 var io;
-var startingDomainLength;
+const startingDomainLength
 module.exports = function (express, app, fs, _, server) {
   io = require('socket.io').listen(server);
   var router = express.Router();
