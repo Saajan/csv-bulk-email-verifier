@@ -5,7 +5,7 @@ var csv = require('csv-parser');
 var emailExistence = require('email-existence');
 var verify = require('../module/bulk-email-verifier');
 var io;
-const startingDomainLength
+var startingDomainLength;
 module.exports = function (express, app, fs, _, server) {
   io = require('socket.io').listen(server);
   var router = express.Router();
@@ -30,6 +30,7 @@ module.exports = function (express, app, fs, _, server) {
             // console.log(data);
             domains.push((data.Emails).split('@')[1]);
           }).on('end', function () {
+            console.log("end");
             io.on('connection', function (socket) {
               // _isValidDomainMX(emails, domains);
               _isValidDomainMX(emails, domains, socket);
@@ -58,7 +59,7 @@ const _isValidDomainMX = (emails, domains, socket) => {
   var finalObj = [];
   setTimeout(function () {
     socket.emit('ping', {
-      data: "alive"
+      data: startingDomainLength
     });
     var mainCount = 0;
     while (domains.length) {
