@@ -15,39 +15,42 @@ let verified = [];
 let unverified = [];
 
 const _isValidDomainMX = (domain) => {
-	// Get the MX Records to find the SMTP server
-	return new Promise((resolve, reject) => {
-	    
-	    dns.resolveMx(domain, (err, addresses) => {
-	    	//console.log(domain, err, addresses);
+  // Get the MX Records to find the SMTP server
+  return new Promise((resolve, reject) => {
 
-	    	if (err || (typeof addresses === 'undefined')) {
-	            unverified.push(domain);
-	        } else if (addresses && addresses.length <= 0) {
-	        	unverified.push(domain);
-	        	console.log("invalid - No MX Records");
-	        } else {
-	        	//Valid Domain, MX Record Found
-	        	verified.push(domain);
-	        }
-	        let stats = {verified: verified, unverified: unverified};
-	        
-	    	resolve(stats);
-	    });	
-	});
+    dns.resolveMx(domain, (err, addresses) => {
+      //console.log(domain, err, addresses);
+
+      if (err || (typeof addresses === 'undefined')) {
+        unverified.push(domain);
+      } else if (addresses && addresses.length <= 0) {
+        unverified.push(domain);
+        console.log("invalid - No MX Records");
+      } else {
+        //Valid Domain, MX Record Found
+        verified.push(domain);
+      }
+      let stats = {
+        verified: verified,
+        unverified: unverified
+      };
+
+      resolve(stats);
+    });
+  });
 }
 
 //Export Module
 module.exports = {
-	
-	verifyDomainMX: (domains) => {
-		verified = [];
-		unverified = [];
-		return domains.reduce((promise, domain) => {
-	    	return promise.then(() => {
-	    		//console.log(domain);
-	            return _isValidDomainMX(domain);
-	        });
-	    }, Promise.resolve());
-	}
+
+  verifyDomainMX: (domains) => {
+    verified = [];
+    unverified = [];
+    return domains.reduce((promise, domain) => {
+      return promise.then(() => {
+        //console.log(domain);
+        return _isValidDomainMX(domain);
+      });
+    }, Promise.resolve());
+  }
 }

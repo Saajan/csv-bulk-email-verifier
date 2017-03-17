@@ -10,19 +10,17 @@
 const dns = require('dns');
 
 const emailRcpt = (email, socket) => {
-  setTimeout(function (email) {
+  setTimeout(function(email) {
     socket.write('RCPT TO:<' + email + '>\r\n', () => {
-      //console.log("RCPT TO" + email);
+      // console.log("RCPT TO" + email);
     });
   }.bind(this, email), 100);
 };
 
 const emailVerify = (domain, emails, options, callback) => {
-
-  //console.log(domain, emails);
+  // console.log(domain, emails);
   let verified = [];
   let unverified = [];
-
 
   // Default Values
   if (options && !options.port) options.port = 25;
@@ -32,26 +30,26 @@ const emailVerify = (domain, emails, options, callback) => {
   if (options && (!options.ignore || typeof options.ignore !== 'number')) options.ignore = false;
 
   // Get the MX Records to find the SMTP server
-  //dns.setServers(['81.218.119.11', '195.46.39.39', '96.90.175.167', '208.76.50.50', '216.146.35.35', '37.235.1.174', '198.101.242.72', '77.88.8.8', '91.239.100.100']);
+  // dns.setServers(['81.218.119.11', '195.46.39.39', '96.90.175.167', '208.76.50.50', '216.146.35.35', '37.235.1.174', '198.101.242.72', '77.88.8.8', '91.239.100.100']);
   dns.resolveMx(domain, (err, addresses) => {
-    //setTimeout(function () {
+    // setTimeout(function () {
     //  dns.setServers(servers);
-    //}, 1000);
-    //console.log("each domain", domain, err, addresses);
+    // }, 1000);
+    // console.log("each domain", domain, err, addresses);
     if (err || (typeof addresses === 'undefined')) {
       callback(err, null);
     } else if (addresses && addresses.length <= 0) {
-      //console.log("No MX Records")
+      // console.log("No MX Records")
       callback(null, {
         success: false,
         info: 'No MX Records'
       });
     } else {
-      //console.log("MX Records")
+      // console.log("MX Records")
       // Find the lowest priority mail server
       let priority = 10000;
       let index = 0;
-      //console.log("address",addresses);
+      // console.log("address",addresses);
       for (let i = 0; i < addresses.length; i++) {
         if (addresses[i].priority < priority) {
           priority = addresses[i].priority;
@@ -72,17 +70,17 @@ const emailVerify = (domain, emails, options, callback) => {
       let email = '';
 
       // Reverse Emails for popout, so sequence of email will be maintain
-      //console.log(emails);
-      //emails.reverse();
+      // console.log(emails);
+      // emails.reverse();
 
       socket.on('data', data => {
         response += data.toString();
         completed = response.slice(-1) === '\n';
 
-        //console.log("data",response);
+        // console.log("data",response);
 
         if (completed) {
-          //console.log("response", response);
+          // console.log("response", response);
           switch (stage) {
             case 0:
               if (response.indexOf('220') > -1 && !ended) {
@@ -112,7 +110,7 @@ const emailVerify = (domain, emails, options, callback) => {
               if (response.indexOf('250') > -1 && !ended) {
                 // Popout one email and sent to socket RCPT command
 
-                //console.log("emails length", emails.length, emails);
+                // console.log("emails length", emails.length, emails);
                 if (Array.isArray(emails)) {
                   email = emails.pop();
                   emailRcpt(email, socket);
@@ -133,12 +131,12 @@ const emailVerify = (domain, emails, options, callback) => {
               if (response.indexOf('250') > -1 || (options.ignore && response.indexOf(options.ignore) > -1)) {
                 // Push into verified list
                 verified.push(email);
-                //console.log('verified', email);
+                // console.log('verified', email);
                 // console.log(response + ' : ' +email);
               } else {
                 // Pushed into unverified list
                 unverified.push(email);
-                //console.log('un-verified', email);
+                // console.log('un-verified', email);
               }
 
               // Check if still there are emails

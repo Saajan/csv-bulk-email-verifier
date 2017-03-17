@@ -54,14 +54,16 @@ const _isValidDomainMX = (emails, domains, socket) => {
   console.log('starting', domains.length);
   var time = 10000;
   setTimeout(function() {
+    var mainCount = 0;
     while (domains.length) {
       // console.log(a.splice(0, 10));
       var newDomains = domains.splice(0, 10);
       var newEmails = emails.splice(0, 10);
       newDomains.forEach(function(domaino, index) {
+        mainCount++;
         var emailo = newEmails[index];
         verify.verifyEmails(domaino, emailo, {}, function(err, data) {
-          console.log('outside_' + index, domaino, emailo, err, data);
+          console.log('outside_' + mainCount, domaino, emailo, err, data);
           var finalObj = {
             domain: domaino,
             email: emailo,
