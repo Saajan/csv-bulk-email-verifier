@@ -71,7 +71,7 @@ const _isValidDomainMX = (emailset, domainset, socket) => {
         });
 
         socket.on("disconnect", function() {
-          socket.socket.reconnect();
+          socket.io.reconnect();
         });
         verify.verifyEmails(domaino, emailo, {}, function(err, data) {
           mainCount++;
