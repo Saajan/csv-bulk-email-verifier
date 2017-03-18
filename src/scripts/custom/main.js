@@ -1,5 +1,10 @@
 (function () {
-  var socket = io.connect('https://digitvalue.herokuapp.com/');
+  var socket = io.connect('https://digitvalue.herokuapp.com/',{
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax : 5000,
+    reconnectionAttempts: Infinity
+  });
   // var socket = io.connect('http://localhost:3000');
   var fullDatum = [];
   var jsonData =[];

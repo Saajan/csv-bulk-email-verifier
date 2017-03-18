@@ -36,11 +36,6 @@ module.exports = function (express, app, fs, _, server) {
             io.on('connection', function (socket) {
               // _isValidDomainMX(emails, domains);
               _isValidDomainMX(emails, domains, socket);
-
-              socket.on("disconnect", function () {
-                console.log(socket);
-                socket.socket.reconnect();
-              });
             });
 
 
