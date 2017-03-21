@@ -72,7 +72,7 @@ const _isValidDomainMX = (emailset, domainset) => {
             status: data,
             error: err
           });
-          if (startingDomainLength === mainCount) {
+          if (startingDomainLength == mainCount) {
             io.on('connection', function(socket) {
               console.log(finalObj);
               socket.emit('success', {
