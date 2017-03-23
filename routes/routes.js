@@ -54,7 +54,6 @@ module.exports = function (express, app, fs, _, server) {
 
 const _isValidDomainMX = (emailset, domainset) => {
   // var time = 10000;
-  var finalObj = [];
   io.on('connection', function (socket) {
     socket.emit('emails', {
       data: emailset
@@ -68,12 +67,12 @@ const _isValidDomainMX = (emailset, domainset) => {
           var emailo = newEmails[index];
           verify.verifyEmails(domaino, emailo, {}, function (err, data) {
             console.log('outside_', domaino, emailo);
-            finalObj.push({
+            var finalObj = {
               domain: domaino,
               email: emailo,
               status: data,
               error: err
-            });
+            };
             socket.emit('success', {
               data: finalObj
             });
