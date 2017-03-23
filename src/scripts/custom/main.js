@@ -16,7 +16,7 @@
       tr.append(td11);
       var td1 = $('<td class="email-name"></td>').text(email);
       tr.append(td1);
-      var td2 = $('<td></td>').text("false");
+      var td2 = $('<td class="status"></td>').text("false");
       tr.append(td2);
       $(tbody).append(tr);
 
@@ -38,18 +38,18 @@
         var search = fullData.email;
         $(".domain-table tbody tr .email-name").filter(function () {
           return $(this).text() == search;
-        }).parent('tr').css('color', 'green');
+        }).parent('tr').css('color', 'green').text("verified");
       } else {
         var search = fullData.email;
         $(".domain-table tbody tr .email-name").filter(function () {
           return $(this).text() == search;
-        }).parent('tr').css('color', 'red');
+        }).parent('tr').css('color', 'red').find('.status').text("unverified");
       }
     } else if (fullData.error != null) {
       var search = fullData.email;
       $(".domain-table tbody tr .email-name").filter(function () {
         return $(this).text() == search;
-      }).parent('tr').css('color', '#aaa');
+      }).parent('tr').css('color', '#aaa').find('.status').text("absent");
     }
     //});
   });
