@@ -38,7 +38,7 @@
         var search = fullData.email;
         $(".domain-table tbody tr .email-name").filter(function () {
           return $(this).text() == search;
-        }).parent('tr').css('color', 'green').text("verified");
+        }).parent('tr').css('color', 'green').find('.status').text("verified");
       } else {
         var search = fullData.email;
         $(".domain-table tbody tr .email-name").filter(function () {
