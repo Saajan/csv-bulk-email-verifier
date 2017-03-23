@@ -67,7 +67,6 @@ const _isValidDomainMX = (emailset, domainset) => {
         newDomains.forEach(function (domaino, index) {
           var emailo = newEmails[index];
           verify.verifyEmails(domaino, emailo, {}, function (err, data) {
-            mainCount++;
             console.log('outside_', domaino, emailo);
             finalObj.push({
               domain: domaino,
