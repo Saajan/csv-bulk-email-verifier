@@ -1,62 +1,62 @@
 (function () {
-  var socket = io.connect('https://digitvalue.herokuapp.com/',{
+  var socket = io.connect('https://digitvalue.herokuapp.com/', {
     reconnection: true,
     reconnectionDelay: 1000,
-    reconnectionDelayMax : 5000,
+    reconnectionDelayMax: 5000,
     reconnectionAttempts: Infinity
   });
   // var socket = io.connect('http://localhost:3000');
-  var fullDatum = [];
-  var jsonData =[];
-  socket.on('success', function (data) {
-    var fullDatum = data.data;
-    console.log(fullDatum); 
-    fullDatum.forEach(function (fullData, index) {
-      if (fullData.status != null || fullData.status != undefined) {
-        if ((fullData.status.verified).length > 0) {
-          // if (fullData.status.verified == '') {
-          //console.log(fullData);
-          // $.each(fullData.status.verified, function (key, value) {
-          var json = {
-            email: fullData.email
-          };
-          jsonData.push(json);
-          // });
-          // }
-        }
-        var tbody = $('.domain-table tbody');
-        var tr = $('<tr></tr>');
-        var td11 = $('<td></td>').text(index);
-        tr.append(td11);
-        var td1 = $('<td></td>').text(fullData.domain);
-        tr.append(td1);
-        var td2 = $('<td></td>').text(fullData.email);
-        tr.append(td2);
-        var td3 = $('<td></td>').text(fullData.status.success);
-        tr.append(td3);
-        var td4 = $('<td></td>').text(fullData.status.verified);
-        tr.append(td4);
-        var td5 = $('<td></td>').text(fullData.status.unverified);
-        tr.append(td5);
-        $(tbody).append(tr);
-      } else if (fullData.error != null) {
-        var tbody = $('.domain-table tbody');
-        var tr = $('<tr></tr>');
-        var td11 = $('<td></td>').text(index);
-        tr.append(td11);
-        var td1 = $('<td></td>').text(fullData.domain);
-        tr.append(td1);
-        var td2 = $('<td></td>').text(fullData.email);
-        tr.append(td2);
-        var td3 = $('<td></td>').text("domain absent");
-        tr.append(td3);
-        var td4 = $('<td></td>').text("");
-        tr.append(td4);
-        var td5 = $('<td></td>').text("");
-        tr.append(td5);
-        $(tbody).append(tr);
-      }
+  //var fullData = [];
+  var jsonData = [];
+
+  socket.on('emails', function (data) {
+
+    var fullEmails = data.data;
+
+    fullEmails.forEach(function (email, index) {
+
+      var tbody = $('.domain-table tbody');
+      var tr = $('<tr></tr>');
+      var td11 = $('<td></td>').text(index);
+      tr.append(td11);
+      var td1 = $('<td class="email-name"></td>').text(email);
+      tr.append(td1);
+      var td2 = $('<td></td>').text("false");
+      tr.append(td2);
+      $(tbody).append(tr);
+
     });
+
+  });
+  socket.on('success', function (data) {
+    var fullData = data.data;
+    console.log(fullData);
+    //fullDatum.forEach(function (fullData, index) {
+    if (fullData.status != null || fullData.status != undefined) {
+      if ((fullData.status.verified).length > 0) {
+        var json = {
+          email: fullData.email
+        };
+        jsonData.push(json);
+      }
+      if ((fullData.status.verified).length > 0) {
+        var search = fullData.email;
+        $(".domain-table tbody tr .email-name").filter(function () {
+          return $(this).text() == search;
+        }).parent('tr').css('color', 'green');
+      } else {
+        var search = fullData.email;
+        $(".domain-table tbody tr .email-name").filter(function () {
+          return $(this).text() == search;
+        }).parent('tr').css('color', 'red');
+      }
+    } else if (fullData.error != null) {
+      var search = fullData.email;
+      $(".domain-table tbody tr .email-name").filter(function () {
+        return $(this).text() == search;
+      }).parent('tr').css('color', '#aaa');
+    }
+    //});
   });
 
   function convertArrayOfObjectsToCSV(args) {

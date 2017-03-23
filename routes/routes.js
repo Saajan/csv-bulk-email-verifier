@@ -6,18 +6,18 @@ var emailExistence = require('email-existence');
 var verify = require('../module/bulk-email-verifier');
 var io;
 var startingDomainLength;
-module.exports = function(express, app, fs, _, server) {
+module.exports = function (express, app, fs, _, server) {
   io = require('socket.io').listen(server);
   var router = express.Router();
   require('events').EventEmitter.defaultMaxListeners = Infinity;
-  router.post('/upload', function(req, res, next) {
+  router.post('/upload', function (req, res, next) {
     var sampleFile;
     if (!req.files) {
       res.send('No files were uploaded.');
       return;
     }
     sampleFile = req.files.sampleFile;
-    sampleFile.mv('public/dist/static/email.csv', function(err) {
+    sampleFile.mv('public/dist/static/email.csv', function (err) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -25,11 +25,11 @@ module.exports = function(express, app, fs, _, server) {
         var emails = [];
         fs.createReadStream('public/dist/static/email.csv')
           .pipe(csv())
-          .on('data', function(data) {
+          .on('data', function (data) {
             emails.push(data.Emails);
             // console.log(data);
             domains.push((data.Emails).split('@')[1]);
-          }).on('end', function() {
+          }).on('end', function () {
             console.log('end');
             console.log('starting', domains.length);
             startingDomainLength = domains.length;
@@ -43,7 +43,7 @@ module.exports = function(express, app, fs, _, server) {
     });
   });
 
-  router.get('/', function(req, res, next) {
+  router.get('/', function (req, res, next) {
     res.render('index', {
       helpers: {}
     });
@@ -55,34 +55,33 @@ module.exports = function(express, app, fs, _, server) {
 const _isValidDomainMX = (emailset, domainset) => {
   // var time = 10000;
   var finalObj = [];
-  setInterval(function() {
-    var mainCount = 0;
-    while (domainset.length) {
-      // console.log(a.splice(0, 10));
-      var newDomains = domainset.splice(0, 10);
-      var newEmails = emailset.splice(0, 10);
-      newDomains.forEach(function(domaino, index) {
-        var emailo = newEmails[index];
-        verify.verifyEmails(domaino, emailo, {}, function(err, data) {
-          mainCount++;
-          console.log('outside_' + mainCount, startingDomainLength, domaino, emailo);
-          finalObj.push({
-            domain: domaino,
-            email: emailo,
-            status: data,
-            error: err
-          });
-          if (startingDomainLength == mainCount) {
-            io.on('connection', function(socket) {
-              console.log(finalObj);
-              socket.emit('success', {
-                data: finalObj
-              });
+  io.on('connection', function (socket) {
+    socket.emit('emails', {
+      data: emailset
+    });
+    setInterval(function () {
+      while (domainset.length) {
+        // console.log(a.splice(0, 10));
+        var newDomains = domainset.splice(0, 10);
+        var newEmails = emailset.splice(0, 10);
+        newDomains.forEach(function (domaino, index) {
+          var emailo = newEmails[index];
+          verify.verifyEmails(domaino, emailo, {}, function (err, data) {
+            mainCount++;
+            console.log('outside_', domaino, emailo);
+            finalObj.push({
+              domain: domaino,
+              email: emailo,
+              status: data,
+              error: err
             });
-          }
+            socket.emit('success', {
+              data: finalObj
+            });
+          });
         });
-      });
-    }
-  }, 5000);
+      }
+    }, 5000);
+  });
   // time += 10000;
 };
